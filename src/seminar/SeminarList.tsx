@@ -1,29 +1,15 @@
-import { useEffect, useState } from 'react';
 import Seminar from './Seminar.tsx';
 import { Table } from 'react-bootstrap';
-import * as axios from 'axios';
-import SeminarType from './Seminar.type.ts';
+import { SeminarListProps } from './Seminar.type.ts';
 
 export const seminarUrl = 'http://localhost:3000/seminars';
 
-const SeminarList = () => {
-  const [seminarList, setSeminarList] = useState<SeminarType[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-
-  useEffect(() => {
-    axios.default
-      .get(seminarUrl)
-      .then(({ data }) => {
-        setSeminarList(data);
-        setIsLoading(false);
-      })
-      .catch(() => {
-        setIsLoading(false);
-        setIsError(true);
-      });
-  }, []);
-
+const SeminarList = ({
+  seminarList,
+  isLoading,
+  isError,
+  setSeminarList,
+}: SeminarListProps) => {
   return (
     <>
       {isLoading && <p>Loading...</p>}

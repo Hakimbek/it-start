@@ -1,0 +1,12 @@
+.add-button__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+}
+
+.add-button__form {
+    display: flex;
+    flex-direction: column;
+}

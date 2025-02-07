@@ -6,3 +6,10 @@ export default interface SeminarType {
   time: string;
   photo: string;
 }
+
+export interface SeminarListProps {
+  seminarList: SeminarType[];
+  setSeminarList: (seminarList: SeminarType[]) => void;
+  isLoading: boolean;
+  isError: boolean;
+}
