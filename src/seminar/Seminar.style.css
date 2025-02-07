@@ -1,0 +1,12 @@
+.seminar-row {
+  vertical-align: middle;
+}
+
+.seminar-photo {
+  width: 100px;
+  border-radius: 20px;
+}
+
+.btn-delete {
+  margin: 5px 0;
+}
