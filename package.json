@@ -9,9 +9,11 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "prepare": "husky",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "server": "npx json-server seminars.json"
   },
   "dependencies": {
+    "json-server": "^1.0.0-beta.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
