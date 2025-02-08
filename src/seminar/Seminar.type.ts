@@ -13,3 +13,8 @@ export interface SeminarListProps {
   isLoading: boolean;
   isError: boolean;
 }
+
+export interface SeminarProps extends SeminarType {
+  seminarList: SeminarType[];
+  setSeminarList: (seminarList: SeminarType[]) => void;
+}

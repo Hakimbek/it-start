@@ -26,15 +26,11 @@ const SeminarList = ({
         </thead>
         <tbody>
           {!isLoading &&
-            seminarList.map(({ id, title, description, date, time, photo }) => (
+            !isError &&
+            seminarList.map((seminar) => (
               <Seminar
-                key={id}
-                id={id}
-                title={title}
-                description={description}
-                date={date}
-                time={time}
-                photo={photo}
+                key={seminar.id}
+                {...seminar}
                 setSeminarList={setSeminarList}
                 seminarList={seminarList}
               />

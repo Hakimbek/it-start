@@ -1,5 +1,5 @@
 import SeminarList, { seminarUrl } from './seminar/SeminarList.tsx';
-import AddButton from './button/AddButton.tsx';
+import Header from './header/Header.tsx';
 import { useEffect, useState } from 'react';
 import SeminarType from './seminar/Seminar.type.ts';
 import * as axios from 'axios';
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <>
-      <AddButton seminarList={seminarList} setSeminarList={setSeminarList} />
+      <Header seminarList={seminarList} setSeminarList={setSeminarList} />
       <SeminarList
         setSeminarList={setSeminarList}
         seminarList={seminarList}

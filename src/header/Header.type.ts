@@ -1,6 +1,6 @@
 import SeminarType from '../seminar/Seminar.type.ts';
 
-export interface ButtonProps {
+export interface HeaderProps {
   setSeminarList: (seminarList: SeminarType[]) => void;
   seminarList: SeminarType[];
 }

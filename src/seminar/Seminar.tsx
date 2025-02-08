@@ -1,14 +1,11 @@
 import { useState } from 'react';
-import SeminarType from './Seminar.type.ts';
 import { seminarUrl } from './SeminarList.tsx';
 import './Seminar.style.css';
 import * as axios from 'axios';
-import { Modal, Button } from 'react-bootstrap';
-
-interface SeminarProps extends SeminarType {
-  seminarList: SeminarType[];
-  setSeminarList: (seminarList: SeminarType[]) => void;
-}
+import { SeminarProps } from './Seminar.type.ts';
+import DeleteSeminarModal from '../modal/DeleteSeminarModal.tsx';
+import EditSeminarModal from '../modal/EditSeminarModal.tsx';
+import Button from 'react-bootstrap/Button';
 
 const Seminar = ({
   id,
@@ -20,25 +17,19 @@ const Seminar = ({
   seminarList,
   setSeminarList,
 }: SeminarProps) => {
-  const [show, setShow] = useState(false);
-  const [isDelete, setIsDelete] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDescription, setEditDescription] = useState(description);
   const [editDate, setEditDate] = useState(date.split('.').join('-'));
   const [editTime, setEditTime] = useState(time);
   const [editPhoto, setEditPhoto] = useState(photo);
 
-  const handleClose = () => setShow(false);
-
-  const handleShow = (isDelete: boolean) => {
-    setIsDelete(isDelete);
-    setShow(true);
-  };
-
   const handleDelete = async (id: string) => {
     const newSeminarList = seminarList.filter((seminar) => seminar.id !== id);
     setSeminarList(newSeminarList);
     await axios.default.delete(`${seminarUrl}/${id}`);
+    setShowDelete(false);
   };
 
   const handleEdit = async (id: string) => {
@@ -59,7 +50,7 @@ const Seminar = ({
     });
     setSeminarList(newSeminarList);
     await axios.default.put(`${seminarUrl}/${id}`, newSeminar);
-    setShow(false);
+    setShowEdit(false);
   };
 
   return (
@@ -73,99 +64,36 @@ const Seminar = ({
           <img src={photo} alt="Photo" className="seminar-photo" />
         </td>
         <td>
-          <button
-            className="btn btn-outline-primary"
-            onClick={() => handleShow(false)}
-          >
+          <Button onClick={() => setShowEdit(true)} variant="outline-primary">
             Edit
-          </button>
-          <button
-            className="btn btn-outline-danger btn-delete"
-            onClick={() => handleShow(true)}
-          >
+          </Button>
+          <Button onClick={() => setShowDelete(true)} variant="outline-danger">
             Delete
-          </button>
+          </Button>
         </td>
       </tr>
-      <Modal show={show} onHide={handleClose}>
-        {isDelete ? (
-          <>
-            <Modal.Header closeButton>
-              <Modal.Title>Are you sure?</Modal.Title>
-            </Modal.Header>
-            <Modal.Footer>
-              <Button variant="danger" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => handleDelete(id)}>
-                Delete
-              </Button>
-            </Modal.Footer>
-          </>
-        ) : (
-          <>
-            <Modal.Header closeButton>
-              <Modal.Title>Edit Seminar</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="add-button__form">
-                <label>Title</label>
-                <input
-                  value={editTitle}
-                  onChange={(e) => setEditTitle(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  placeholder="Title"
-                />
-
-                <label>Description</label>
-                <input
-                  value={editDescription}
-                  onChange={(e) => setEditDescription(e.target.value)}
-                  type="text"
-                  className="form-control"
-                  placeholder="Description"
-                />
-
-                <label>Date</label>
-                <input
-                  type="date"
-                  className="form-control"
-                  placeholder="Date"
-                  value={editDate}
-                  onChange={(e) => setEditDate(e.target.value)}
-                />
-
-                <label>Time</label>
-                <input
-                  type="time"
-                  className="form-control"
-                  placeholder="Time"
-                  value={editTime}
-                  onChange={(e) => setEditTime(e.target.value)}
-                />
-
-                <label>Photo URL</label>
-                <input
-                  type="url"
-                  className="form-control"
-                  placeholder="Photo URL"
-                  value={editPhoto}
-                  onChange={(e) => setEditPhoto(e.target.value)}
-                />
-              </div>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="danger" onClick={handleClose}>
-                Close
-              </Button>
-              <Button variant="primary" onClick={() => handleEdit(id)}>
-                Edit Changes
-              </Button>
-            </Modal.Footer>
-          </>
-        )}
-      </Modal>
+      <DeleteSeminarModal
+        id={id}
+        show={showDelete}
+        setShow={setShowDelete}
+        handleDelete={handleDelete}
+      />
+      <EditSeminarModal
+        id={id}
+        show={showEdit}
+        setShow={setShowEdit}
+        title={editTitle}
+        setTitle={setEditTitle}
+        description={editDescription}
+        setDescription={setEditDescription}
+        date={editDate}
+        setDate={setEditDate}
+        time={editTime}
+        setTime={setEditTime}
+        photo={editPhoto}
+        setPhoto={setEditPhoto}
+        handleEdit={handleEdit}
+      />
     </>
   );
 };
