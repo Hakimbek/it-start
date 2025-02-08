@@ -24,7 +24,7 @@ const AddButton = ({ setSeminarList, seminarList }: ButtonProps) => {
       id: uuidv4(),
       title,
       description,
-      date: date.split('-').join(''),
+      date: date.split('-').join('.'),
       time,
       photo,
     };
