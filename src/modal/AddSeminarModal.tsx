@@ -4,6 +4,7 @@ import { AddSeminarModalProps } from './Modal.type.ts';
 
 import './Modal.style.css';
 
+// This modal is opened when user will click the "Add Seminar" button
 const AddSeminarModal = ({
   show,
   setShow,

@@ -8,6 +8,7 @@ import AddSeminarModal from '../modal/AddSeminarModal.tsx';
 
 import './Header.style.css';
 
+// Header component shows title and "Add Seminar" button
 const Header = ({ setSeminarList, seminarList }: HeaderProps) => {
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState('');
@@ -16,7 +17,9 @@ const Header = ({ setSeminarList, seminarList }: HeaderProps) => {
   const [time, setTime] = useState('');
   const [photo, setPhoto] = useState('');
 
+  // This function handles adding seminars
   const handleSave = async () => {
+    // We generate new seminar from inputs
     const newSeminarList = {
       id: uuidv4(),
       title,
@@ -26,8 +29,11 @@ const Header = ({ setSeminarList, seminarList }: HeaderProps) => {
       photo,
     };
 
+    // Add seminar to state
     setSeminarList([...seminarList, newSeminarList]);
+    // Make call to add seminar to server
     await axios.default.post(seminarUrl, newSeminarList);
+    // Close modal
     setShow(false);
   };
 

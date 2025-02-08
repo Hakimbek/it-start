@@ -2,6 +2,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { EditSeminarModalProps } from './Modal.type.ts';
 import Input from '../common/Input.tsx';
 
+// This modal is opened when user will click the "Edit" button
 const EditSeminarModal = ({
   id,
   show,

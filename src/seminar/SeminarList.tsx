@@ -4,6 +4,7 @@ import { SeminarListProps } from './Seminar.type.ts';
 
 export const seminarUrl = 'http://localhost:3000/seminars';
 
+// We will get seminars from props and pass them to "Seminar" component
 const SeminarList = ({
   seminarList,
   isLoading,

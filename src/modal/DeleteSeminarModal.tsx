@@ -1,6 +1,7 @@
 import { Button, Modal } from 'react-bootstrap';
 import { DeleteSeminarModalProps } from './Modal.type.ts';
 
+// This modal is opened when user will click the "Delete" button
 const DeleteSeminarModal = ({
   id,
   show,

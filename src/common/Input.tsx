@@ -1,5 +1,6 @@
 import { InputProps } from './Input.type.ts';
 
+// My custom input component to reduce boilerplate code
 const Input = ({ label, value, setValue, type }: InputProps) => {
   return (
     <>
